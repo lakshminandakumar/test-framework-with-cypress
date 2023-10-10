@@ -8,7 +8,7 @@ export default defineConfig({
     e2e: {
           retries: 1,
           specPattern: "**/*.cy.ts",
-          baseUrl: "https://demoqa.com/login",
+          baseUrl: "https://demoqa.com",
       },
       env: {
           tags: 'not @wip'
