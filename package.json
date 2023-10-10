@@ -1,0 +1,17 @@
+{
+  "name": "test-framework-with-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open"
+  },
+  "author": "Lakshmi Nandakumar",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.3.0"
+  },
+  "dependencies": {
+    "typescript": "^5.2.2"
+  }
+}
