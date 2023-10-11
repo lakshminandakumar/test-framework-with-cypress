@@ -1,28 +1,34 @@
 /// <reference types="cypress" />
 
-describe('Tools QA', () => {
+describe('Tools QA Login feature', () => {
+    let data;
     beforeEach(() => {
         cy.visit('/login');
+        cy.fixture('login').then((loginData) => {
+            data = loginData;
+        });
+        
     })
 
     it('logs in successfully', () => {
-        cy.get('#userName').type('demo.user');
-        cy.get('#password').type('Dem0u$er');
-        cy.get('button#login').click();
-        cy.contains('Log out').should('exist');
+        const { username, password } = data.validCredentials;
+        cy.login(username, password);
+
+        cy.get('#submit').should('exist');
+        cy.contains('Log out').should('be.visible');
     })
 
     it('does not log in successfully with incorrect username', () => {
-        cy.get('#userName').type('demo.user1');
-        cy.get('#password').type('Dem0u$er');
-        cy.get('button#login').click();
-        cy.contains('Invalid username or password!').should('exist');
+        const { username, password } = data.incorrectUsername;
+        cy.login(username, password);
+
+        cy.contains('Invalid username or password!').should('be.visible');
     })
 
     it('does not log in successfully with incorrect password', () => {
-        cy.get('#userName').type('demo.user');
-        cy.get('#password').type('Dem0u$er1');
-        cy.get('button#login').click();
-        cy.contains('Invalid username or password!').should('exist');
+        const { username, password } = data.incorrectPassword;
+        cy.login(username, password);
+
+        cy.contains('Invalid username or password!').should('be.visible');
     })
 })
