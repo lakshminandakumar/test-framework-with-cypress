@@ -1,14 +1,17 @@
 /// <reference types="cypress" />
 
 describe('Tools QA Login feature', () => {
+    let data;
     beforeEach(() => {
         cy.visit('/login');
-        cy.fixture('login').as('data');
+        cy.fixture('login').then((loginData) => {
+            data = loginData;
+        });
         
     })
 
     it('logs in successfully', () => {
-        const { username, password } = this.data.validCredentials;
+        const { username, password } = data.validCredentials;
         cy.login(username, password);
 
         cy.get('#submit').should('exist');
@@ -16,14 +19,14 @@ describe('Tools QA Login feature', () => {
     })
 
     it('does not log in successfully with incorrect username', () => {
-        const { username, password } = this.data.incorrectUsername;
+        const { username, password } = data.incorrectUsername;
         cy.login(username, password);
 
         cy.contains('Invalid username or password!').should('be.visible');
     })
 
     it('does not log in successfully with incorrect password', () => {
-        const { username, password } = this.data.incorrectPassword;
+        const { username, password } = data.incorrectPassword;
         cy.login(username, password);
 
         cy.contains('Invalid username or password!').should('be.visible');
