@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('Tools QA Login feature', () => {
-    let data;
+    let data; //closure variable
     beforeEach(() => {
         cy.visit('/login');
         cy.fixture('login').then((loginData) => {
