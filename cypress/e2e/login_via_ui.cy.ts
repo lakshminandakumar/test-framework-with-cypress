@@ -1,27 +1,23 @@
 /// <reference types="cypress" />
 
-describe('Tools QA Login feature', () => {
-    let data; //closure variable
+import { onLoginPage } from '../e2e/pageObjects/LoginPage';
+
+describe('ToolsQA Login Feature', () =>{
     beforeEach(() => {
         cy.visit('/login');
-        cy.fixture('login').then((loginData) => {
-            data = loginData;
-        });
-        
+        onLoginPage.isOnLoginPage();
     })
 
     it('logs in successfully', () => {
-        const { username, password } = data.validCredentials;
-        cy.login(username, password);
+        onLoginPage.doLoginWithValidCredentials();
 
         cy.get('#submit').should('exist');
         cy.contains('Log out').should('be.visible');
     })
 
     it('does not log in successfully with invalid credentials', () => {
-        const { username, password } = data.invalidCredentials;
-        cy.login(username, password);
-
+        onLoginPage.doLoginWithInvalidCredentials();
+        
         cy.contains('Invalid username or password!').should('be.visible');
     })
 })

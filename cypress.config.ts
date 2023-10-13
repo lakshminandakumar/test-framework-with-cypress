@@ -1,4 +1,4 @@
-import { defineConfig } from 'cypress';
+import { defineConfig } from 'cypress';                 
 
 async function setupNodeEvents(on, config){
     
@@ -9,8 +9,5 @@ export default defineConfig({
           retries: 1,
           specPattern: "**/*.cy.ts",
           baseUrl: "https://demoqa.com",
-      },
-      env: {
-          tags: 'not @wip'
-      },
+    }
   });
