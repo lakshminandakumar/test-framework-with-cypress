@@ -10,15 +10,6 @@ export class LoginPage {
         cy.get(this.loginButton).should('exist');
     }
 
-    getFixtureData() {
-        let data;
-        cy.fixture('login').then((loginData) => {
-            data = loginData;
-        });
-        console.log(data);
-        return data;
-    }
-
     enterEmail(email: string) {
         cy.get(this.userNameField).clear().type(email);
     }
@@ -32,16 +23,14 @@ export class LoginPage {
     }
 
     doLoginWithValidCredentials() {
-        let data = this.getFixtureData();
-        this.enterEmail(data.validCredentials.username);
-        this.enterPassword(data.validCredentials.password);
+        this.enterEmail(Cypress.env('validUsername'));
+        this.enterPassword(Cypress.env('validPassword'));
         this.clickLoginButton();
     }
 
     doLoginWithInvalidCredentials() {
-        let data = this.getFixtureData();
-        this.enterEmail(data.invalidCredentials.username);
-        this.enterPassword(data.invalidCredentials.password);
+        this.enterEmail(Cypress.env('invalidUsername'));
+        this.enterPassword(Cypress.env('invalidPassword'));
         this.clickLoginButton();
     }
 

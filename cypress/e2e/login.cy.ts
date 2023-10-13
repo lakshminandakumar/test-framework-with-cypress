@@ -18,15 +18,8 @@ describe('Tools QA Login feature', () => {
         cy.contains('Log out').should('be.visible');
     })
 
-    it('does not log in successfully with incorrect username', () => {
-        const { username, password } = data.incorrectUsername;
-        cy.login(username, password);
-
-        cy.contains('Invalid username or password!').should('be.visible');
-    })
-
-    it('does not log in successfully with incorrect password', () => {
-        const { username, password } = data.incorrectPassword;
+    it('does not log in successfully with invalid credentials', () => {
+        const { username, password } = data.invalidCredentials;
         cy.login(username, password);
 
         cy.contains('Invalid username or password!').should('be.visible');

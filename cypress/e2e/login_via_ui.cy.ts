@@ -5,6 +5,7 @@ import { onLoginPage } from '../e2e/pageObjects/LoginPage';
 describe('ToolsQA Login Feature', () =>{
     beforeEach(() => {
         cy.visit('/login');
+        onLoginPage.isOnLoginPage();
     })
 
     it('logs in successfully', () => {
