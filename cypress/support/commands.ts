@@ -16,6 +16,22 @@ Cypress.Commands.add('login', (username, password) => {
         cy.get('#password').clear().type(password);
         cy.get('button#login').click();
   });
+
+Cypress.Commands.add('loginViaApi', () => {
+        cy.request({
+          method: 'POST',
+          url: 'https://demoqa.com/Account/v1/GenerateToken',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: {
+            userName: Cypress.env('validUsername'),
+            password: Cypress.env('validPassword')
+          }
+        }).then(({ body }) => {
+          window.localStorage.setItem('authToken', body.token);
+        })
+})
 //
 //
 // -- This is a child command --
