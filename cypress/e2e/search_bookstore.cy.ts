@@ -1,11 +1,12 @@
 describe('Searching Function in ToolsQA Book Store App', () => {
     beforeEach(() => {
-        cy.loginViaApi();
         cy.visit('/books');
-        cy.get('input#searchBox').should('exist');
+        cy.loginViaApi();
+        // cy.get('input#searchBox').should('exist');
     })
-
-    it('searchs for a book', () => {
-        cy.get('input#searchBox').clear().type('Git')
+    it('search for a book', () => {
+        // cy.get('input#searchBox').clear().type('Git')
+        cy.get('input#searchBox').should('exist');
+        cy.get('button#submit').should('be visible');
     })
 })

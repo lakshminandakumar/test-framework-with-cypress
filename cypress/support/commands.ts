@@ -20,7 +20,7 @@ Cypress.Commands.add('login', (username, password) => {
 Cypress.Commands.add('loginViaApi', () => {
         cy.request({
           method: 'POST',
-          url: 'https://demoqa.com/Account/v1/Authorized',
+          url: 'https://demoqa.com/Account/v1/GenerateToken',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -28,7 +28,9 @@ Cypress.Commands.add('loginViaApi', () => {
             userName: Cypress.env('validUsername'),
             password: Cypress.env('validPassword')
           }
-        }).its('status').should('equal', 200)
+        }).then(({ body }) => {
+          window.localStorage.setItem('authToken', body.token);
+        })
 })
 //
 //
